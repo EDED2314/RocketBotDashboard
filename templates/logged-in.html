@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<style>
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  justify-items: center;
+}
+
+.card {
+  margin: 0.5em;
+  display: grid;
+  grid-template-rows: 1fr 0.2fr;
+  justify-items: center;
+}
+
+.card:hover {
+  box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em,
+    rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+  transform: scale(1.1);
+}
+
+.card img {
+  border-radius: 50%;
+  width: 7em;
+  height: 7em;
+}
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Rocket Bot Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="static/css/main.css" />
+    <link rel="icon" type="image/x-icon/ico" href="static/logo/RocketBot-logos_50.jpeg">
+    <noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
+</head>
+<body class="is-preload">
+<section id="two" class="main style2">
+    <div class="container">
+        <div style="text-align: center;">
+            <div class="col-6 col-12-medium">
+            <header class="major">
+                <h2>Select the sever for your task(s)</h2>
+            </header>
+            </div>
+        </div>
+        <div class="col-6 col-12-medium">
+							<ul class="major-icons">
+
+
+                                <div class="cards">
+                                {% for guild in guilds %}
+                                    <div class="card">
+                                        <a href="/dashboard/{{guild['gd']}}">
+                                        <img src="{{guild['i']}}" alt=""/>
+                                        </a>
+                                        <br />
+                                        {{ guild['gn']}}
+                                    </div>
+                                    {% endfor %}
+                                </div>
+
+
+
+							</ul>
+        </div>
+    </div>
+</section>
+			<script src="static/js/jquery.min.js"></script>
+			<script src="static/js/jquery.scrolly.min.js"></script>
+			<script src="static/js/browser.min.js"></script>
+			<script src="static/js/breakpoints.min.js"></script>
+			<script src="static/js/util.js"></script>
+			<script src="static/js/main.js"></script>
+</body>
+</html>

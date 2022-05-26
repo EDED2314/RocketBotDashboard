@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<style>
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  justify-items: center;
+}
+
+.card {
+  margin: 0.5em;
+  display: grid;
+  grid-template-rows: 1fr 0.2fr;
+  justify-items: center;
+}
+
+.card:hover {
+  box-shadow: rgba(2, 8, 20, 0.1) 0px 0.35em 1.175em,
+    rgba(2, 8, 20, 0.08) 0px 0.175em 0.5em;
+  transform: scale(1.1);
+}
+
+.card img {
+  border-radius: 50%;
+  width: 7em;
+  height: 7em;
+}
+</style>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+    <link rel="icon" type="image/x-icon/ico" href="{{ url_for('static', filename='logo/RocketBot-logos_50.jpeg') }}">
+    <noscript><link rel="stylesheet" href="static/css/noscript.css" /></noscript>
+    <title>{{ guild_name }} || {{ user_name }} tasks</title>
+
+</head>
+<body class="is-preload" style="background-color:#333;">
+<section id="two" class="main style2">
+    <div class="container">
+        <div style="text-align: center;">
+            <div class="col-6 col-12-medium">
+                <h2>{{ user_name }}'s tasks</h2>
+            </div>
+        </div>
+        <form method="post">
+							<div class="row gtr-uniform gtr-50">
+								<div class="col-6 col-12-xsmall">
+									<input type="text" name="task" id="task" value="" placeholder="Task" required/>
+								</div>
+								<div class="col-6 col-12-xsmall">
+									<input type="text" name="due" id="due" value="" placeholder="Due date" required/>
+								</div>
+                                <div style="text-align: center;">
+                                    <div class="action">
+                                        <input type="submit" class="primary" value="Assgin this task">
+                                    </div>
+                                </div>
+                            </div>
+        </form>
+        <div class="table-wrapper">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task</th>
+                        <th>Due</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                {% for task in tasks %}
+                    <tbody>
+                        <tr>
+                            <td>{{ task['task'] }}</td>
+                            <td>{{ task['due'] }}</td>
+                            <td><a href="/dashboard/{{guild_id}}/{{ user_id }}/tasks/complete?&task={{ task['task'] }}&due={{ task['due'] }}">Complete this task</a></td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+            </table>
+        </div>
+
+        </div>
+    </div>
+</section>
+<section id="two">
+    <ul>
+        <div style="text-align: center;">
+            <li><a class="button primary" href="{{ prev_url }}">Go back</a></li>
+        </div>
+    </ul>
+</section>
+			<script src="/static/js/jquery.min.js"></script>
+			<script src="/static/js/jquery.scrolly.min.js"></script>
+			<script src="/static/js/browser.min.js"></script>
+			<script src="/static/js/breakpoints.min.js"></script>
+			<script src="/static/js/util.js"></script>
+			<script src="/static/js/main.js"></script>
+</body>
+</html>
